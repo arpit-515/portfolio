@@ -3,21 +3,29 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
-  FaReact,
   FaNodeJs,
+  FaSitemap,
+  FaProjectDiagram,
   FaPython,
-  FaHtml5,
-  FaCss3Alt,
   FaJs,
+  FaGithub,
 } from "react-icons/fa";
-import { SiGithub, SiMongodb, SiTailwindcss } from "react-icons/si";
+import {
+  SiFlutter,
+  SiDart,
+  SiSupabase,
+  SiPostgresql,
+  SiMongodb,
+  SiTailwindcss,
+  SiFirebase,
+} from "react-icons/si";
 import { ProjectCard } from "./project-card";
 import { HeaderBadge } from "../ui/header-badge";
 import { Sparkles } from "lucide-react";
 import { BorderBeam } from "../ui/border-beam";
 import Link from "next/link";
 
-// Define types for the project data
+
 export interface Technology {
   name: string;
   icon: any;
@@ -29,165 +37,125 @@ export interface Project {
   description: string;
   technologies: Technology[];
   images: string[];
-  liveUrl: string;
+  liveUrl?: string;
   githubUrl: string;
   features: string[];
   category: string;
+  learnings?: string[];
 }
 
-// Mock project data
-const mockProjects: Project[] = [
+
+const projects: Project[] = [
   {
     id: 1,
-    title: "E-commerce Dashboard",
+    title: "Zweather App", 
     description:
-      "A comprehensive admin dashboard for managing online stores with real-time analytics and inventory management.",
+      "A Flutter-based real-time weather app with a custom UI, smooth animations, and backend-powered data fetching.",
+    category: "Mobile App",
+
     technologies: [
-      { name: "React", icon: FaReact },
-      { name: "Node.js", icon: FaNodeJs },
+      { name: "Flutter", icon: SiFlutter },
+      { name: "Dart", icon: SiDart },
       { name: "Python", icon: FaPython },
-      { name: "MongoDB", icon: SiMongodb },
-      { name: "TailwindCSS", icon: SiTailwindcss },
     ],
+
     images: [
-      "/elon.jpg",
-      "/sundar.avif",
-      "/elon.jpg",
-      "/sundar.avif",
-      "/elon.jpg",
-      "/sundar.avif",
-    ],
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com/example/project",
+      "/app-4.png",
+      "/app-5.png",
+      "/app-6.png",
+    ], 
+
+    liveUrl: "https://github.com/arpit-515/Zweather-app", 
+    githubUrl: "https://github.com/arpit-515/Zweather-app",
+
     features: [
-      "Real-time analytics",
-      "Inventory management",
-      "Sales tracking",
-      "Customer insights",
+      "Real time weather updates",
+      "Hero animations for forecast screen",
+      "Backend-powered weather metadata fetching",
+      "Optimized UI for smooth scrolling",
     ],
-    category: "Full Stack",
+
+    learnings: [
+      "Managing async state in Flutter",
+      "Designing APIs for mobile clients",
+      "Handling edge cases in fetching weather",
+    ],
   },
+
   {
     id: 2,
-    title: "Mobile Banking App",
+    title: "Moodlift App",
     description:
-      "Secure mobile banking application with biometric authentication and real-time transaction monitoring.",
+      "A Mental - Health tracking and improving app",
+    category: "Full-Stack",
+
     technologies: [
-      { name: "React", icon: FaReact },
-      { name: "Node.js", icon: FaNodeJs },
-      { name: "JavaScript", icon: FaJs },
-      { name: "MongoDB", icon: SiMongodb },
-      { name: "CSS3", icon: FaCss3Alt },
+      { name: "Flutter", icon: SiFlutter },
+      { name: "Dart", icon: SiDart },
+      { name: "Firebase", icon: SiFirebase },
+      { name: "PostgreSQL", icon: SiPostgresql },
     ],
+
     images: [
-      "/elon.jpg",
-      "/sundar.avif",
-      "/elon.jpg",
-      "/sundar.avif",
-      "/elon.jpg",
-      "/sundar.avif",
+      "/app-1.png",
+      "/app-2.png",
+      "/app-3.png",
     ],
-    liveUrl: "",
-    githubUrl: "https://github.com/example/banking-app",
+
+    githubUrl: "https://github.com/arpit-515/moodlift-frontend",
+
     features: [
-      "Biometric authentication",
-      "Real-time transactions",
-      "Budget tracking",
-      "Secure encryption",
+      "Focused on clean UI/UX to create a calming, low-stress user experience",
+      "Encrypted Data Storage",
+      "Implemented secure and maintainable frontend architecture",
+      "Secure environment variable handling",
     ],
-    category: "Mobile App",
+
+    learnings: [
+      "Frontend security awareness",
+      "Codebase refactoring skills",
+      "State and data handling",
+    ],
   },
+
   {
-    id: 3,
-    title: "AI Content Generator",
-    description:
-      "AI-powered content generation tool for creating blog posts, social media content, and marketing copy.",
-    technologies: [
-      { name: "Python", icon: FaPython },
-      { name: "React", icon: FaReact },
-      { name: "Node.js", icon: FaNodeJs },
-      { name: "JavaScript", icon: FaJs },
-      { name: "TailwindCSS", icon: SiTailwindcss },
-    ],
-    images: [
-      "/elon.jpg",
-      "/sundar.avif",
-      "/elon.jpg",
-      "/sundar.avif",
-      "/elon.jpg",
-      "/sundar.avif",
-    ],
-    liveUrl: "https://ai-content.example.com",
-    githubUrl: "https://github.com/example/ai-content",
-    features: [
-      "AI-powered generation",
-      "Multiple content types",
-      "SEO optimization",
-      "Content scheduling",
-    ],
-    category: "AI/ML",
-  },
-  {
-    id: 4,
-    title: "Task Management System",
-    description:
-      "Collaborative task management platform with real-time updates and team collaboration features.",
-    technologies: [
-      { name: "React", icon: FaReact },
-      { name: "Node.js", icon: FaNodeJs },
-      { name: "MongoDB", icon: SiMongodb },
-      { name: "JavaScript", icon: FaJs },
-      { name: "TailwindCSS", icon: SiTailwindcss },
-    ],
-    images: [
-      "/proj-1.png",
-      "/sundar.avif",
-      "/elon.jpg",
-      "/sundar.avif",
-      "/elon.jpg",
-      "/sundar.avif",
-    ],
-    liveUrl: "https://tasks.example.com",
-    githubUrl: "https://github.com/example/task-manager",
-    features: [
-      "Real-time updates",
-      "Team collaboration",
-      "Project management",
-      "Task scheduling",
-    ],
-    category: "Productivity",
-  },
-  {
-    id: 5,
-    title: "Weather Forecast App",
-    description:
-      "Beautiful weather application with detailed forecasts, maps, and location-based alerts.",
-    technologies: [
-      { name: "React", icon: FaReact },
-      { name: "JavaScript", icon: FaJs },
-      { name: "CSS3", icon: FaCss3Alt },
-      { name: "HTML5", icon: FaHtml5 },
-      { name: "TailwindCSS", icon: SiTailwindcss },
-    ],
-    images: [
-      "/elon.jpg",
-      "/sundar.avif",
-      "/elon.jpg",
-      "/sundar.avif",
-      "/elon.jpg",
-      "/sundar.avif",
-    ],
-    liveUrl: "",
-    githubUrl: "https://github.com/example/weather-app",
-    features: [
-      "Real-time weather",
-      "Interactive maps",
-      "Location alerts",
-      "Detailed forecasts",
-    ],
-    category: "Web App",
-  },
+  id: 3,
+  title: "Maze Generator & Solver",
+  description:
+    "A Python-based application to generate random mazes and solve them using classic pathfinding algorithms.",
+  category: "Algorithms",
+
+  technologies: [
+    { name: "Python", icon: FaPython },
+    { name: "Algorithms", icon: FaProjectDiagram },
+    { name: "Data Structures", icon: FaSitemap },   
+  ],
+
+  images: [
+    "/maze-1.png", 
+    "/maze-2.png",
+  ],
+
+  githubUrl: "https://github.com/arpit-515/maze-generator-solver",
+
+  features: [
+    "Random maze generation using algorithmic logic",
+    "Maze solving using BFS and DFS",
+    "Visual representation of paths and dead ends",
+    "Optimized traversal for performance",
+  ],
+
+  learnings: [
+    "Algorithmic problem solving",
+    "Graph traversal techniques",
+    "Efficient data structures",
+  ],
+},
 ];
+
+/* ================================
+   ANIMATIONS
+================================ */
 
 const fadeInUp = {
   initial: { y: 40, opacity: 0 },
@@ -201,76 +169,77 @@ const stagger = {
     },
   },
 };
-export const formatDate = (dateString: string) => {
-  return new Date(dateString).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-  });
-};
+
+/* ================================
+   COMPONENT
+================================ */
 
 export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="min-h-screen py-16 mb-12 bg-background sm:px-4">
+      className="min-h-screen py-16 mb-12 bg-background sm:px-4"
+    >
       <div className="container max-w-6xl mx-auto">
-        {/* Section Header */}
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="mb-16 text-center">
+          className="mb-16 text-center"
+        >
           <HeaderBadge
             icon={<Sparkles className="size-4" />}
             text="My Projects"
           />
+
           <h2 className="mb-4 text-3xl font-bold md:text-4xl">
-            Featured Projects
+            Things I’ve Built
           </h2>
+
           <p className="max-w-2xl mx-auto text-lg text-muted-foreground">
-            A collection of projects that showcase my skills in modern web
-            development and problem-solving capabilities.
+            Real-world projects focused on mobile apps, backend systems,
+            and clean architecture.
           </p>
         </motion.div>
 
-        {/* Projects Grid */}
+        {/* Projects */}
         <motion.div
           variants={stagger}
           initial="initial"
           whileInView="animate"
           viewport={{ once: true }}
-          className="grid gap-8">
-          {mockProjects.map((project) => (
-            <motion.div key={project.id} variants={fadeInUp} className="group">
+          className="grid gap-8"
+        >
+          {projects.map((project) => (
+            <motion.div key={project.id} variants={fadeInUp}>
               <ProjectCard project={project} />
             </motion.div>
           ))}
         </motion.div>
 
+        {/* GitHub CTA */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true }}
-          className="mt-12 text-center">
+          className="mt-12 text-center"
+        >
           <Button
             variant="outline"
             asChild
             size="lg"
-            className="relative rounded-full bg-linear-t hover:bg-transparent hover:shadow-primary">
-            <Link href={"https://github.com/akkaldhami"} target="_blank">
-              <SiGithub className="w-4 h-4 mr-2" /> Explore My GitHub Profile
-              <BorderBeam
-                size={40}
-                initialOffset={20}
-                className="from-transparent via-zinc-900 dark:via-zinc-50 to-transparent"
-                transition={{
-                  type: "spring",
-                  stiffness: 60,
-                  damping: 20,
-                }}
-              />
+            className="relative rounded-full"
+          >
+            <Link
+              href="https://github.com/arpit-515"
+              target="_blank"
+            >
+              <FaGithub className="w-4 h-4 mr-2" />
+              See My Code & Experiments
+              <BorderBeam size={40} initialOffset={20} />
             </Link>
           </Button>
         </motion.div>

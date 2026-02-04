@@ -1,8 +1,8 @@
 "use client";
+
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -22,53 +22,69 @@ interface FormData {
   message: string;
 }
 
+const FORMSPREE_URL = "https://formspree.io/f/mlglqzpv";
+
 function ContactDialog() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (!formData.name) {
-      toast.error("Please enter your name.");
-      return;
-    } else if (!formData.email) {
-      toast.error("Please enter your email.");
-      return;
-    } else if (!formData.message) {
-      toast.error("Please enter your message.");
-      return;
-    }
-
-    console.log("Form submitted:", formData);
-    setIsOpen(false);
-    setFormData({ name: "", email: "", message: "" });
-    toast.success("Message sent successfully!");
-  };
-
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!formData.name || !formData.email || !formData.message) {
+      toast.error("Please fill all required fields.");
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+
+      const res = await fetch(FORMSPREE_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) {
+        throw new Error("Form submission failed");
+      }
+
+      toast.success("Message sent successfully!");
+      setFormData({ name: "", email: "", message: "" });
+      setIsOpen(false);
+    } catch (error) {
+      toast.error("Something went wrong. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <InteractiveHoverButton> Let&apos;s Talk</InteractiveHoverButton>
+        <InteractiveHoverButton>Let&apos;s Talk</InteractiveHoverButton>
       </DialogTrigger>
+
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Get in Touch</DialogTitle>
           <p className="text-sm text-muted-foreground">
-            Ready to start your project?
+            Send a message directly to my inbox.
           </p>
         </DialogHeader>
 
@@ -81,6 +97,7 @@ function ContactDialog() {
               placeholder="Your full name"
               value={formData.name}
               onChange={handleChange}
+              required
             />
           </div>
 
@@ -93,6 +110,7 @@ function ContactDialog() {
               placeholder="your.email@example.com"
               value={formData.email}
               onChange={handleChange}
+              required
             />
           </div>
 
@@ -106,12 +124,17 @@ function ContactDialog() {
               rows={4}
               value={formData.message}
               onChange={handleChange}
+              required
             />
           </div>
 
-          <Button type="submit" className="w-full cursor-pointer">
+          <Button
+            type="submit"
+            className="w-full cursor-pointer"
+            disabled={isSubmitting}
+          >
             <Send className="h-4 w-4 mr-2" />
-            Send Message
+            {isSubmitting ? "Sending..." : "Send Message"}
           </Button>
         </form>
       </DialogContent>

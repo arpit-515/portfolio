@@ -12,25 +12,25 @@ import ContactDialog from "./contact-dialog";
 const socialLinks = [
   {
     name: "GitHub",
-    href: "https://github.com/akkaldhami",
+    href: "https://github.com/arpit-515",
     icon: "↗",
     description: "Check out my code",
   },
   {
     name: "LinkedIn",
-    href: "https://github.com/akkaldhami",
+    href: "https://www.linkedin.com/in/arpitsingh515/",
     icon: "↗",
-    description: "Professional profile",
+    description: "LinkedIn profile",
   },
   {
     name: "Twitter",
-    href: "https://github.com/akkaldhami",
+    href: "https://x.com/arpit05150",
     icon: "↗",
-    description: "Latest updates",
+    description: "Twitter updates",
   },
   {
     name: "Email",
-    href: "mailto:dhamiakkal21@gmail",
+    href: "mailto:arpitsingh.05150@gmail.com",
     icon: "↗",
     description: "Send me an email",
   },

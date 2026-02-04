@@ -3,59 +3,36 @@
 import { motion } from "framer-motion";
 import { Code, Server, Database, Settings, Sparkles } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { HeaderBadge } from "../ui/header-badge";
+import { cn } from "@/lib/utils";
 
+// Icons
 import {
-  // Frontend
-  FaReact,
-  FaVuejs,
-  FaAngular,
-  FaHtml5,
-  FaCss3Alt,
-  FaJs,
-  FaSass,
-  FaBootstrap,
-  // Backend
   FaNodeJs,
   FaPython,
-  FaJava,
-  FaPhp,
-  FaDocker,
-  FaAws,
+  FaGitAlt,
+  FaLinux,
 } from "react-icons/fa";
 
 import {
-  // Database
-  SiMongodb,
-  SiPostgresql,
-  SiMysql,
-  SiRedis,
-  SiSqlite,
-  // Tools
-  SiWebpack,
-  SiJest,
-  SiFigma,
-  SiPostman,
-  SiLinux,
-  SiNginx,
-  SiGithub,
-} from "react-icons/si";
-import { FaGitAlt, FaNpm, FaYarn } from "react-icons/fa";
-import {
-  SiNextdotjs,
-  SiTypescript,
-  SiTailwindcss,
-  SiExpress,
-  SiDjango,
-  SiSpringboot,
-  SiLaravel,
+  SiDart,
+  SiKotlin,
   SiFirebase,
-  SiVite,
-  SiEslint,
-  SiPrettier,
+  SiFlutter,
+  SiPostgresql,
+  SiMongodb,
+  SiMysql,
+  SiSupabase,
+  SiGithub,
+  SiPostman,
+  SiDocker,
 } from "react-icons/si";
+
 import { VscVscode } from "react-icons/vsc";
-import { HeaderBadge } from "../ui/header-badge";
-import { cn } from "@/lib/utils";
+
+/* ================================
+   Animations
+================================ */
 
 const fadeInUp = {
   initial: { y: 40, opacity: 0 },
@@ -70,91 +47,88 @@ const stagger = {
   },
 };
 
+/* ================================
+   Skills Data (REALISTIC)
+================================ */
+
 const skillsData = {
-  frontend: {
-    title: "Frontend",
+  mobile: {
+    title: "Mobile Development",
     icon: Code,
-    description: "Modern frontend technologies and frameworks",
-    color: "from-blue-500 to-cyan-500",
+    description: "Building smooth, user-focused mobile applications",
     skills: [
-      { name: "React", icon: FaReact, color: "#61DAFB" },
-      { name: "Next.js", icon: SiNextdotjs, color: "#000000" },
-      { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
-      { name: "JavaScript", icon: FaJs, color: "#F7DF1E" },
-      { name: "HTML5", icon: FaHtml5, color: "#E34F26" },
-      { name: "CSS3", icon: FaCss3Alt, color: "#1572B6" },
-      { name: "Tailwind CSS", icon: SiTailwindcss, color: "#38B2AC" },
-      { name: "Sass", icon: FaSass, color: "#CC6699" },
-      { name: "Bootstrap", icon: FaBootstrap, color: "#7952B3" },
+      { name: "Flutter", icon: SiFlutter },
+      { name: "Dart", icon: SiDart },
+      { name: "Kotlin", icon: SiKotlin },
+      { name: "Firebase", icon: SiFirebase },
     ],
   },
+
   backend: {
-    title: "Backend",
+    title: "Backend & APIs",
     icon: Server,
-    description: "Server-side technologies and runtime environments",
-    color: "from-green-500 to-emerald-500",
+    description: "Server-side logic, APIs, and data handling",
     skills: [
-      { name: "Node.js", icon: FaNodeJs, color: "#339933" },
-      { name: "Express.js", icon: SiExpress, color: "#000000" },
-      { name: "Docker", icon: FaDocker, color: "#2496ED" },
-      { name: "AWS", icon: FaAws, color: "#FF9900" },
+      { name: "Node.js", icon: FaNodeJs },
+      { name: "Python", icon: FaPython },
+      { name: "REST APIs", icon: SiPostman },
+      { name: "Supabase", icon: SiSupabase },
     ],
   },
+
   database: {
-    title: "Database",
+    title: "Databases",
     icon: Database,
-    description: "Database management systems and data storage",
-    color: "from-purple-500 to-pink-500",
+    description: "Data modeling and persistence",
     skills: [
-      { name: "MongoDB", icon: SiMongodb },
       { name: "PostgreSQL", icon: SiPostgresql },
+      { name: "MongoDB", icon: SiMongodb },
       { name: "MySQL", icon: SiMysql },
-      { name: "Redis", icon: SiRedis },
     ],
   },
+
   tools: {
-    title: "Tools & Technologies",
+    title: "Tools & Environment",
     icon: Settings,
-    description: "Development tools, platforms and utilities",
-    color: "from-orange-500 to-red-500",
+    description: "Development tools and workflow",
     skills: [
       { name: "Git", icon: FaGitAlt },
-      { name: "Github", icon: SiGithub },
+      { name: "GitHub", icon: SiGithub },
+      { name: "Linux", icon: FaLinux },
+      { name: "Docker", icon: SiDocker },
       { name: "VS Code", icon: VscVscode },
-      { name: "Figma", icon: SiFigma },
       { name: "Postman", icon: SiPostman },
-      { name: "Vite", icon: SiVite },
-      { name: "Jest", icon: SiJest },
-      { name: "ESLint", icon: SiEslint },
-      { name: "Prettier", icon: SiPrettier },
-      { name: "NPM", icon: FaNpm },
-      { name: "Linux", icon: SiLinux },
-      { name: "Nginx", icon: SiNginx },
     ],
   },
 };
+
+/* ================================
+   Component
+================================ */
 
 export default function SkillsSection() {
   return (
     <section id="skills" className="bg-background px-4 py-16 mb-12">
       <div className="container mx-auto max-w-6xl">
-        {/* Section Header */}
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16">
+          className="text-center mb-16"
+        >
           <HeaderBadge
             icon={<Sparkles className="size-4" />}
-            text="Skills & Technologies"
+            text="Skills & Tools"
           />
+
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Skills & Technologies
           </h2>
+
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            A collection of skills and technologies that I have acquired over
-            the years.
+            Technologies I use to build reliable mobile apps and backend systems.
           </p>
         </motion.div>
 
@@ -164,22 +138,22 @@ export default function SkillsSection() {
           initial="initial"
           whileInView="animate"
           viewport={{ once: true }}
-          className="grid grid-cols-1 gap-6">
+          className="grid grid-cols-1 gap-6"
+        >
           {Object.entries(skillsData).map(([key, category]) => (
-            <motion.div key={key} variants={fadeInUp} className="group">
-              <Card className="h-full bg-transparent dark:bg-transparent border  transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-600">
+            <motion.div key={key} variants={fadeInUp}>
+              <Card className="bg-transparent border transition-all hover:border-neutral-400">
                 <CardContent className="p-6">
                   {/* Category Header */}
                   <div className="flex items-center gap-3 mb-4">
-                    <div
-                      className={`p-2 rounded-md border border-neutral-500/40 dark:border-neutral-600 bg-transparent dark:bg-transparent`}>
-                      <category.icon className="size-5 sm:size-7" />
+                    <div className="p-2 rounded-md border">
+                      <category.icon className="size-5 sm:size-6" />
                     </div>
                     <div>
-                      <h3 className="font-medium text-lg sm:text-xl">
+                      <h3 className="font-medium text-lg">
                         {category.title}
                       </h3>
-                      <p className="text-base text-muted-foreground">
+                      <p className="text-sm text-muted-foreground">
                         {category.skills.length} skills
                       </p>
                     </div>
@@ -189,23 +163,22 @@ export default function SkillsSection() {
                     {category.description}
                   </p>
 
-                  {/* Skills Grid */}
+                  {/* Skills */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                     {category.skills.map((skill, index) => (
                       <motion.div
                         key={skill.name}
-                        initial={{ opacity: 0, scale: 0.8 }}
+                        initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         transition={{ delay: index * 0.05 }}
                         viewport={{ once: true }}
                         className={cn(
-                          "flex items-center gap-2 p-2 rounded-lg border border-neutral-500/40 dark:border-neutral-500/30 hover:border-neutral-500 dark:hover:border-neutral-600 transition-colors duration-200 group/item",
-                          index % 2 === 0 ? "bg-linear-r" : "bg-linear-b"
-                        )}>
-                        <div className="p-1.5 rounded-md">
-                          <skill.icon className="size-5 text-accent-foreground" />
-                        </div>
-                        <span className="text-base font-medium text-muted-foreground group-hover/item:text-accent-foreground truncate">
+                          "flex items-center gap-2 p-2 rounded-lg border transition-colors",
+                          "hover:border-neutral-400"
+                        )}
+                      >
+                        <skill.icon className="size-5" />
+                        <span className="text-base font-medium truncate">
                           {skill.name}
                         </span>
                       </motion.div>
@@ -217,30 +190,33 @@ export default function SkillsSection() {
           ))}
         </motion.div>
 
-        {/* Additional Stats */}
+        {/* Honest Stats */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true }}
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
+          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 text-center"
+        >
           {[
-            { label: "Projects Completed", value: "50+" },
-            { label: "Years Experience", value: "3+" },
-            { label: "Technologies", value: "30+" },
-            { label: "Happy Clients", value: "25+" },
+            { label: "Projects Built", value: "8+" },
+            { label: "Tech Stack", value: "15+" },
+            { label: "Languages", value: "4" },
+            { label: "OS Used", value: "Linux" },
           ].map((stat, index) => (
             <motion.div
               key={stat.label}
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="text-center">
-              <div className="text-2xl md:text-3xl font-bold  mb-2">
+            >
+              <div className="text-2xl font-bold mb-1">
                 {stat.value}
               </div>
-              <div className="text-sm text-muted-foreground">{stat.label}</div>
+              <div className="text-sm text-muted-foreground">
+                {stat.label}
+              </div>
             </motion.div>
           ))}
         </motion.div>

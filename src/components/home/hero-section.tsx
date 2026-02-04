@@ -13,34 +13,37 @@ import Link from "next/link";
 
 export default function CoolHeroSection() {
   const words = [
-    "Backend Developer with Node & Express",
-    "Frontend Developer with React & TypeScript",
-    "Full Stack JavaScript Developer",
-    "Next.js & React.js Developer with TypeScript",
-    "Next.js Developer focused on speed and scalability",
-    "RESTful & GraphQL API Architect",
-    "Modern Web App Builder",
-    "Tech Enthusiast and Problem Solver",
-    "Lifelong Learner and Innovator",
-    "Developer focused with clean, maintainable code",
-    "Builder of modern digital experiences",
-    "JavaScript Lover and Ecosystem Explorer",
-    "TypeScript Advocate",
-    "Engineer dedicated to building scalable systems"
+    "Android Developer with Kotlin & Jetpack Compose",
+    "Flutter Developer building smooth cross-platform apps",
+    "Mobile App Developer focused on performance",
+    "Backend Developer with Flask & Node.js",
+    "API Builder using RESTful architectures",
+    "Full-Stack Mobile Developer",
+    "Problem Solver with a DSA-first mindset",
+    "Builder of scalable and reliable systems",
+    "Engineer who cares about clean architecture",
+    "Developer focused on maintainable, readable code",
+    "Tech Explorer with a curiosity-driven approach",
+    "Learner constantly leveling up",
+    "Builder of real-world products, not just demos"
   ];
 
+
   const techStack = [
-    "React.js",
-    "Next.js",
-    "TypeScript",
-    "JavaScript",
-    "Node.js",
-    "Express.js",
-    "GraphQL",
-    "REST API",
+    "Kotlin",
+    "Jetpack Compose",
+    "Flutter",
+    "Dart",
+    "Java",
+    "Python",
+    "Flask",
+    "REST APIs",
+    "Supabase",
+    "PostgreSQL",
     "MongoDB",
-    "MySQL"
+    "Git",
   ];
+
 
   return (
     <section
@@ -53,7 +56,7 @@ export default function CoolHeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             className="text-3xl sm:text-5xl font-bold mb-5">
-            Akkal Dhami
+            Arpit Singh
           </motion.h1>
 
           <motion.div
@@ -74,7 +77,7 @@ export default function CoolHeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
               className="text-xl text-muted-foreground mb-8 max-w-xl leading-relaxed w-full">
-              I create modern, responsive web applications with
+              I create modern, responsive applications with
               {techStack.map((tech, i) =>
                 i === techStack.length - 1 ? (
                   <span
@@ -86,8 +89,7 @@ export default function CoolHeroSection() {
                     className="text-accent-foreground">{` ${tech}, `}</span>
                 )
               )}
-              Clean code, smooth experiences, and modern design are at the heart
-              of what I do.
+              Clean code, smooth experiences, and modern design.
             </motion.p>
 
             <motion.div

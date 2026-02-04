@@ -1,7 +1,6 @@
 "use client";
 
 import { Mail, Package, User, Moon, Sun, BriefcaseIcon } from "lucide-react";
-import { FaRegComments } from "react-icons/fa";
 import { VscTools } from "react-icons/vsc";
 import { MenuDock, MenuDockItem } from "../ui/dock";
 import { useTheme } from "next-themes";
@@ -49,14 +48,6 @@ export function Navbar() {
             ?.scrollIntoView({ behavior: "smooth" }),
       },
       {
-        label: "testimonials",
-        icon: FaRegComments,
-        onClick: () =>
-          document
-            .getElementById("testimonials")
-            ?.scrollIntoView({ behavior: "smooth" }),
-      },
-      {
         label: "contact",
         icon: Mail,
         onClick: () =>
@@ -72,29 +63,16 @@ export function Navbar() {
     ];
   }, [currentTheme, setTheme]);
 
-  // ✅ Alternative: Scroll-based section detection
   useEffect(() => {
     setMounted(true);
-
-    const sectionIds = [
-      "about",
-      "projects",
-      "skills",
-      "education",
-      "testimonials",
-      "contact",
-    ];
-
+    const sectionIds = ["about", "projects", "skills", "education", "contact"];
     const sectionToIndexMap: Record<string, number> = {};
     customMenuItems.forEach((item, index) => {
-      if (item.label !== "theme") {
-        sectionToIndexMap[item.label] = index;
-      }
+      if (item.label !== "theme") sectionToIndexMap[item.label] = index;
     });
 
     const findActiveSection = () => {
       const scrollPosition = window.scrollY + window.innerHeight / 3;
-
       let activeSection = "";
       let minDistance = Infinity;
 
@@ -105,7 +83,6 @@ export function Navbar() {
           const elementTop = rect.top + window.scrollY;
           const elementBottom = elementTop + rect.height;
 
-          // Check if element is in viewport
           if (elementTop <= scrollPosition && elementBottom >= scrollPosition) {
             const distance = Math.abs(elementTop - scrollPosition);
             if (distance < minDistance) {
@@ -117,14 +94,12 @@ export function Navbar() {
       });
 
       if (activeSection && sectionToIndexMap[activeSection] !== undefined) {
-        const newIndex = sectionToIndexMap[activeSection];
-        if (newIndex !== activeIndex) {
-          setActiveIndex(newIndex);
+        if (sectionToIndexMap[activeSection] !== activeIndex) {
+          setActiveIndex(sectionToIndexMap[activeSection]);
         }
       }
     };
 
-    // Throttled scroll handler
     let ticking = false;
     const handleScroll = () => {
       if (!ticking) {
@@ -136,9 +111,7 @@ export function Navbar() {
       }
     };
 
-    // Initial check
     findActiveSection();
-
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", findActiveSection);
 
@@ -147,19 +120,22 @@ export function Navbar() {
       window.removeEventListener("resize", findActiveSection);
     };
   }, [customMenuItems, activeIndex]);
+
   if (!mounted) return null;
 
   return (
     <>
-      <div className="fixed z-50 w-full -translate-x-1/2 rounded-lg bottom-2 bg-background left-1/2">
+      <div className="fixed z-50 bottom-4 left-1/2 -translate-x-1/2 w-max">
         <MenuDock
           items={customMenuItems}
           variant="default"
           animated={false}
           activeIndex={activeIndex}
+          className="relative mx-0 w-auto left-auto right-auto top-auto bottom-auto translate-x-0 sm:w-auto sm:left-auto sm:translate-x-0 border-0"
         />
 
-        <div className="fixed -bottom-1 inset-x-0 h-16 w-full bg-background to-transparent backdrop-blur-lg [-webkit-mask-image:linear-gradient(to_top,black,transparent)] dark:bg-background"></div>
+        {}
+        <div className="absolute inset-0 -z-10 bg-background/80 backdrop-blur-md border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-lg"></div>
       </div>
     </>
   );

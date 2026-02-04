@@ -11,9 +11,9 @@ const font = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Akkal Dhami - Full Stack Developer",
+  title: "Arpit Singh - Full Stack Developer",
   description:
-    "Portfolio of Akkal Dhami, a skilled Full Stack Developer specializing in modern web applications using React, Next.js, Node.js, and TypeScript. Explore projects, skills, and contact information."
+    "Portfolio of Arpit Singh."
 };
 
 export default function RootLayout({
