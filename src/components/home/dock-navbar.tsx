@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, Package, User, Moon, Sun, BriefcaseIcon } from "lucide-react";
+import { Mail, Package, User, Moon, Sun } from "lucide-react";
 import { VscTools } from "react-icons/vsc";
 import { MenuDock, MenuDockItem } from "../ui/dock";
 import { useTheme } from "next-themes";
@@ -40,14 +40,6 @@ export function Navbar() {
             ?.scrollIntoView({ behavior: "smooth" }),
       },
       {
-        label: "education",
-        icon: BriefcaseIcon,
-        onClick: () =>
-          document
-            .getElementById("education")
-            ?.scrollIntoView({ behavior: "smooth" }),
-      },
-      {
         label: "contact",
         icon: Mail,
         onClick: () =>
@@ -65,7 +57,7 @@ export function Navbar() {
 
   useEffect(() => {
     setMounted(true);
-    const sectionIds = ["about", "projects", "skills", "education", "contact"];
+    const sectionIds = ["about", "projects", "skills", "contact"];
     const sectionToIndexMap: Record<string, number> = {};
     customMenuItems.forEach((item, index) => {
       if (item.label !== "theme") sectionToIndexMap[item.label] = index;
